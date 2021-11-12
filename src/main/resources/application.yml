@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  main:
+    web-application-type: reactive
+  redis:
+    host: test-redis-nocluster.h3codv.ng.0001.apn2.cache.amazonaws.com
+    port: 6379
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: first-service
+          uri: http://localhost:8001/first-service/welcome
+          predicates:
+            - Path=/first-service/**
+          filters:
+            - AddRequestHeader=first-request, first-request-header
+            - AddResponseHeader=first-resonse, first-response-header
+            - CustomFilter
+        - id: second-service
+          uri: http://localhost:8002/second-service/welcome
+          predicates:
+            - Path=/second-service/**
+          filters:
+            - CustomFilter
