@@ -8,8 +8,8 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
-@Component
 @Slf4j
+@Component
 public class CustomFilter extends AbstractGatewayFilterFactory<CustomFilter.Config> {
   public CustomFilter() {
     super(Config.class);

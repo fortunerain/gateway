@@ -4,8 +4,11 @@ server:
 spring:
   main:
     web-application-type: reactive
+  profiles:
+    active: local
   redis:
-    host: test-redis-nocluster.h3codv.ng.0001.apn2.cache.amazonaws.com
+#    host: test-redis-nocluster.h3codv.ng.0001.apn2.cache.amazonaws.com
+    host: localhost
     port: 6379
   application:
     name: gateway-service
@@ -26,3 +29,9 @@ spring:
             - Path=/second-service/**
           filters:
             - CustomFilter
+logging:
+  file:
+    path: ./logs
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
